@@ -1,0 +1,95 @@
+* {
+  font-family: 'Press Start 2P', cursive;
+  -webkit-appearance: none;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  image-rendering: pixelated;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  background: none;
+  margin: 0;
+}
+
+.timerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./img/ScreenBackground.png');
+  transform: scale(1.4);
+  image-rendering: pixelated;
+  width: 224px;
+  height: 160px;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./img/InputBackground.png');
+  transform: scale(1.4);
+  margin-top: 15px;
+  width: 192px;
+  height: 64px;
+}
+
+#inputMinute {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  /* background-image: url('./img/InputBackground.png'); */
+  width: 96px;
+  height: 32px;
+}
+
+.changeMinuteBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.increase {
+  background-image: url('./img/IncreaseButton.png');
+}
+.decrease {
+  background-image: url('./img/DecreaseButton.png');
+}
+
+.submitContainer {
+  margin-top: 15px;
+  width: 192px;
+  height: 32px;
+}
+
+.submitBtn {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  margin: 0;
+}
+
+.btnImg {
+  width: 64px;
+  height: 64px;
+}
