@@ -57,6 +57,7 @@ class Canvas extends Component {
     this.queueAnimation = [];
     this.unmountedAnimation = Sprites.map((sprite) => {
       sprite.ctx = this.ctx;
+      sprite.speed.x = 3;
       sprite.scale = yRem / 2;
       sprite.markedPositionY = getInitialPositionRange(30, 45);
       sprite.position.y = yRem * sprite.markedPositionY;
