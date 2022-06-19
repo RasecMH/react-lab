@@ -102,7 +102,9 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    this.audio.play();
+    window.addEventListener('click', () => {
+      this.audio.play();
+    });
     this.audio.volume = 0.06;
     this.audio.loop = true;
     this.audio.addEventListener('ended', () =>
