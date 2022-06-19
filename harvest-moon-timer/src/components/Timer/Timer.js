@@ -9,34 +9,33 @@ class Timer extends Component {
     setInputMinutes: 1,
     timerStarted: false,
     isTimerRunnig: false,
+    isAudioPlaying: true,
   };
+
+  audio = new Audio(require('./audio/TimerSound.mp3'));
 
   handleSetMinute = (e) => {
     if (e.target.name === 'decrease' && this.state.setInputMinutes > 1) {
       return this.setState((prevState) => ({
-        setInputMinutes: prevState.setInputMinutes - 1,
+        setInputMinutes: isNaN(prevState.setInputMinutes)
+          ? 1
+          : prevState.setInputMinutes - 1,
         timerStarted: false,
         isTimerRunnig: false,
       }));
     }
     if (e.target.name === 'increase') {
       return this.setState((prevState) => ({
-        setInputMinutes: prevState.setInputMinutes + 1,
+        setInputMinutes: isNaN(prevState.setInputMinutes)
+          ? 1
+          : prevState.setInputMinutes + 1,
         timerStarted: false,
         isTimerRunnig: false,
       }));
     }
     if (e.target.name === 'inputMinute') {
-      if (isNaN(e.target.value)) {
-        return this.setState({
-          setInputMinutes: 1,
-          timerStarted: false,
-          isTimerRunnig: false,
-        });
-      }
       return this.setState({
-        setInputMinutes:
-          e.target.value && e.target.value > 0 ? parseInt(e.target.value) : 1,
+        setInputMinutes: parseInt(e.target.value),
         timerStarted: false,
         isTimerRunnig: false,
       });
@@ -82,6 +81,18 @@ class Timer extends Component {
       isTimerRunnig: false,
     });
   };
+  handleAudio = () => {
+    this.setState(
+      (prevState) => ({
+        isAudioPlaying: !prevState.isAudioPlaying,
+      }),
+      () => {
+        this.state.isAudioPlaying
+          ? (this.audio.muted = false)
+          : (this.audio.muted = true);
+      }
+    );
+  };
 
   componentDidUpdate() {
     const { secondsAmount, timerStarted } = this.state;
@@ -90,9 +101,23 @@ class Timer extends Component {
     }
   }
 
+  componentDidMount() {
+    this.audio.play();
+    this.audio.volume = 0.06;
+    this.audio.loop = true;
+    this.audio.addEventListener('ended', () =>
+      this.setState({ isAudioPlaying: false })
+    );
+  }
+
   render() {
-    const { setInputMinutes, secondsAmount, timerStarted, isTimerRunnig } =
-      this.state;
+    const {
+      setInputMinutes,
+      secondsAmount,
+      timerStarted,
+      isTimerRunnig,
+      isAudioPlaying,
+    } = this.state;
     const minutes = Math.floor(secondsAmount / 60);
     const seconds = secondsAmount % 60;
     return (
@@ -110,6 +135,7 @@ class Timer extends Component {
             onClick={this.handleSetMinute}></button>
           <input
             name='inputMinute'
+            min={1}
             id='inputMinute'
             value={setInputMinutes}
             onChange={this.handleSetMinute}
@@ -149,12 +175,23 @@ class Timer extends Component {
               src={require('./img/ResetButton.png')}
             />
           </button>
-          <button className='submitBtn' type='button'>
-            <img
-              className='btnImg'
-              alt='playbutton'
-              src={require('./img/SoundButton.png')}
-            />
+          <button
+            className='submitBtn'
+            type='button'
+            onClick={this.handleAudio}>
+            {isAudioPlaying ? (
+              <img
+                className='btnImg'
+                alt='playbutton'
+                src={require('./img/SoundButton.png')}
+              />
+            ) : (
+              <img
+                className='btnImg'
+                alt='playbutton'
+                src={require('./img/SoundMuteButton.png')}
+              />
+            )}
           </button>
         </div>
       </div>
