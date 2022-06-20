@@ -13,6 +13,7 @@ class Timer extends Component {
   };
 
   audio = new Audio(require('./audio/TimerSound.mp3'));
+  audioEnd = new Audio(require('./audio/finished.mp3'));
 
   handleSetMinute = (e) => {
     if (e.target.name === 'decrease' && this.state.setInputMinutes > 1) {
@@ -59,12 +60,15 @@ class Timer extends Component {
       return this.handleTimer();
     }
     if (!timerStarted) {
-      this.setState({
-        secondsAmount: setInputMinutes * 60,
-        timerStarted: true,
-      }, () => {
-      this.audio.play();
-      });
+      this.setState(
+        {
+          secondsAmount: setInputMinutes * 60,
+          timerStarted: true,
+        },
+        () => {
+          this.audio.play();
+        }
+      );
       this.handleTimer();
     } else {
       clearInterval(this.intervalId);
@@ -99,6 +103,7 @@ class Timer extends Component {
   componentDidUpdate() {
     const { secondsAmount, timerStarted } = this.state;
     if (secondsAmount === 0 && timerStarted) {
+      this.audioEnd.play();
       this.handleResetTimer();
     }
   }
