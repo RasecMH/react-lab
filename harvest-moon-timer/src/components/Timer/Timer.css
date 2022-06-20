@@ -93,3 +93,9 @@ input::-webkit-inner-spin-button {
   width: 64px;
   height: 64px;
 }
+/* 
+@media (max-width: 1000px) {
+  .timerContainer {
+    background-image: url('./img/BackgroundMobile2.png');
+  }
+} */

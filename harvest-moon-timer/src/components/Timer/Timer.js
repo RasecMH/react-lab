@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Timer.css';
 
-const INITIAL_TIME_IN_SECONDS = 5 * 60;
+const INITIAL_TIME_IN_SECONDS = 1 * 60;
 
 class Timer extends Component {
   state = {
@@ -62,6 +62,8 @@ class Timer extends Component {
       this.setState({
         secondsAmount: setInputMinutes * 60,
         timerStarted: true,
+      }, () => {
+      this.audio.play();
       });
       this.handleTimer();
     } else {
@@ -102,9 +104,6 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('click', () => {
-      this.audio.play();
-    });
     this.audio.volume = 0.06;
     this.audio.loop = true;
     this.audio.addEventListener('ended', () =>

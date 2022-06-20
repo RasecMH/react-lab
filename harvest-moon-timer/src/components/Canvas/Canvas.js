@@ -54,8 +54,21 @@ class Canvas extends Component {
       ctx: this.ctx,
     });
 
+    console.log(Sprites);
+
     this.queueAnimation = [];
-    this.unmountedAnimation = Sprites.map((sprite) => {
+    this.unmountedAnimation = Sprites[0].map((sprite) => {
+      sprite.ctx = this.ctx;
+      sprite.speed.x = 3;
+      sprite.scale = yRem / 2;
+      sprite.markedPositionY = getInitialPositionRange(30, 45);
+      sprite.position.y = yRem * sprite.markedPositionY;
+      return new Sprite(sprite);
+    }).sort(() => Math.random() - 0.5);
+
+    this.queueAnimation2 = [];
+    this.unmountedAnimation2 = Sprites[1].map((sprite) => {
+      sprite.position.x = -1000
       sprite.ctx = this.ctx;
       sprite.speed.x = 3;
       sprite.scale = yRem / 2;
@@ -65,6 +78,7 @@ class Canvas extends Component {
     }).sort(() => Math.random() - 0.5);
 
     this.spawnAnimation();
+    this.spawnAnimation2();
 
     this.animate();
 
@@ -91,6 +105,11 @@ class Canvas extends Component {
     this.unmountedAnimation.splice(0, 1);
   };
 
+  spawnAnimation2 = () => {
+    this.queueAnimation2.push(this.unmountedAnimation2[0]);
+    this.unmountedAnimation2.splice(0, 1);
+  };
+
   animate = () => {
     window.requestAnimationFrame(this.animate);
     this.background.drawBackground();
@@ -104,12 +123,23 @@ class Canvas extends Component {
         this.queueAnimation.splice(i, 1);
       }
     });
+
+    this.queueAnimation2.forEach((sprite, i) => {
+      sprite.update();
+
+      if (sprite.position.x >= window.innerWidth) {
+        sprite.position.x = sprite.initialPosition;
+        this.spawnAnimation2();
+        this.unmountedAnimation2.push(sprite);
+        this.queueAnimation2.splice(i, 1);
+      }
+    });
   };
 
   render() {
     return (
       <div>
-        <canvas
+           <canvas
           ref={this.canvas}
           width={window.innerWidth}
           height={window.innerHeight}></canvas>

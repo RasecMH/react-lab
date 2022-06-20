@@ -61,7 +61,8 @@ WolfMovingImg.src = require('./img/WolfMoving.png');
 //Sprites
 
 export const Sprites = [
-  {
+  [
+    {
     initialPosition: -500,
     stopPoint: 400,
     position: {
@@ -212,9 +213,11 @@ export const Sprites = [
       x: 0,
       y: 0,
     },
-  },
+  }
+  ],
+[  
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -233,7 +236,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -252,7 +255,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -271,7 +274,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -290,7 +293,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -309,7 +312,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -328,7 +331,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -347,7 +350,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -366,7 +369,7 @@ export const Sprites = [
     },
   },
   {
-    initialPosition: -500,
+    initialPosition: -1000,
     stopPoint: 400,
     position: {
       x: -500,
@@ -384,4 +387,5 @@ export const Sprites = [
       y: 0,
     },
   },
+]
 ];
